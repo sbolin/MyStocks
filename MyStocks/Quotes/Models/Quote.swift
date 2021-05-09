@@ -5,7 +5,7 @@
 //  Created by Scott Bolin on 26-Apr-21.
 //
 
-import Foundation
+import SwiftUI
 
 struct GlobalQuoteResponse: Codable {
     let quote: Quote
@@ -54,6 +54,69 @@ struct Quote: Codable {
     
     var name: String {
         return "Company"
+    }
+    
+    var smallNumberDecimalFormatter = Formatter.smallNumberDecimalFormatter
+    var largeNumberSeparatorFormatter = Formatter.largeNumberSeparatorFormatter
+    
+    var priceD: Double {
+        return Double(price)!
+    }
+    
+    var openD: Double {
+        return Double(open)!
+    }
+    
+    var lowD: Double {
+        return Double(low)!
+    }
+    
+    var highD: Double {
+        return Double(high)!
+    }
+    
+    var volD: Double {
+        return Double(volume)!
+    }
+    
+    var changeD: Double {
+        return Double(change)!
+    }
+    
+    var lowCurrent: Bool {
+        return priceD / lowD > 1 ? true : false
+    }
+    
+    var highCurrent: Bool {
+        return priceD / highD > 1 ? true : false
+    }
+    
+    var formattedPrice: String {
+        return smallNumberDecimalFormatter.string(from: NSNumber(value: priceD))!
+    }
+    
+    var formattedOpen: String {
+        return smallNumberDecimalFormatter.string(from: NSNumber(value: openD))!
+    }
+    
+    var formattedVol: String {
+        return largeNumberSeparatorFormatter.string(from: NSNumber(value: volD))!
+    }
+    
+    var formattedLow: String {
+        return smallNumberDecimalFormatter.string(from: NSNumber(value: lowD))!
+    }
+    
+    var formattedHigh: String {
+        return smallNumberDecimalFormatter.string(from: NSNumber(value: highD))!
+    }
+    
+    var formattedChange: String {
+        return smallNumberDecimalFormatter.string(from: NSNumber(value: changeD))!
+    }
+    
+    var formattedChangePercent: String {
+        return smallNumberDecimalFormatter.string(from: NSNumber(value: changePercentDouble))!
     }
 }
 
